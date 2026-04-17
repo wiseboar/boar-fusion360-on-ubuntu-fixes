@@ -1,0 +1,130 @@
+[box-run-vd] Starting Fusion in Wine virtual desktop 3456x1944
+wine: could not open working directory L"unix\\home\\boar\\", starting in the Windows directory.
+warn:  CreateDXGIFactory2: Ignoring flags
+err:   readMonitorEdidFromKey: Failed to get EDID reg key size
+err:   DXGI: Failed to parse display metadata + colorimetry info, using blank.
+warn:  CreateDXGIFactory2: Ignoring flags
+warn:  CreateDXGIFactory2: Ignoring flags
+err:   readMonitorEdidFromKey: Failed to get EDID reg key size
+err:   DXGI: Failed to parse display metadata + colorimetry info, using blank.
+warn:  D3D11DXGIDevice::QueryInterface: Unknown interface query
+warn:  0ec870a6-5d7e-4c22-8cfc-5baae07616ed
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11: Failed to write shared resource info for a texture
+err:   D3D11DXGIKeyedMutex::AcquireSync: Not supported
+warn:  D3D11Texture2D::QueryInterface: Unknown interface query
+warn:  f8fb5c27-c6b3-4f75-a4c8-439af2ef564c
+warn:  D3D11Device::OpenSharedResourceGeneric: Failed to get shared resource info for a texture
+warn:  D3D11: Failed to write shared resource info for a texture
+err:   D3D11DXGIKeyedMutex::AcquireSync: Not supported
+warn:  D3D11: Failed to write shared resource info for a texture
+err:   D3D11DXGIKeyedMutex::AcquireSync: Not supported
+warn:  CreateDXGIFactory2: Ignoring flags
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+err:   readMonitorEdidFromKey: Failed to get EDID reg key size
+err:   DXGI: Failed to parse display metadata + colorimetry info, using blank.
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
+warn:  D3D11: Failed to write shared resource info for a texture
+err:   D3D11DXGIKeyedMutex::AcquireSync: Not supported
+warn:  CreateDXGIFactory2: Ignoring flags
+err:   readMonitorEdidFromKey: Failed to get EDID reg key size
+err:   DXGI: Failed to parse display metadata + colorimetry info, using blank.
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
+warn:  D3D11: Failed to write shared resource info for a texture
+err:   D3D11DXGIKeyedMutex::AcquireSync: Not supported
+warn:  D3D11: Failed to write shared resource info for a texture
+err:   D3D11DXGIKeyedMutex::AcquireSync: Not supported
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  D3D11Device::CreateShaderModule: Class linkage not supported
+warn:  DXGI: MakeWindowAssociation: Ignoring flags
