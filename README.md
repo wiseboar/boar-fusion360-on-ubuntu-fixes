@@ -249,3 +249,11 @@ HKCU\Software\Wine\X11 Driver:
 - `fusion_installer.sh` — vendored copy of str0g's installer (as of 2025-11-28).
 - `run-install.sh` — wrapper that sets `DISPLAY`/`XAUTHORITY`/`WINEDEBUG` and logs to `install.log`/`install.last.log`.
 - `fusion-launch.log` — rolling log of our manual launches while debugging (safe to delete).
+
+# Known Issues
+
+There's still render issues in-app that aren't resolved with black background and disappearing UI elements, so the app is not (yet) in a usable state.
+
+# Agent Model
+
+generated & tested using Opus 4.7 / April 2026
