@@ -11,8 +11,21 @@ got Autodesk Fusion 360 (non-commercial) running on:
 
 ## TL;DR
 
-Install = run `./run-install.sh` (wraps `fusion_installer.sh` from str0g's
-installer with extra logging). Launch = `~/.fusion360/wineprefixes/box-run.sh`.
+```bash
+make install              # one-shot installer (wraps str0g's fusion_installer.sh)
+make start_fusion_360     # launch Fusion via virtual-desktop launcher (recommended)
+make logs                 # tail the current fusion-launch.log
+make doctor               # summarise wine / DXVK / glvnd / DPI / desktop-entry state
+make clean_desktop_duplicates
+                          # remove the Wine-generated duplicate Start-Menu entry
+make install_desktop_entry
+                          # (re)write ~/.local/share/applications/Fusion360.desktop
+                          #  + a trusted shortcut on the Desktop
+```
+
+Under the hood, `make start_fusion_360` runs
+`~/.fusion360/wineprefixes/box-run-vd.sh` (the virtual-desktop launcher);
+`make start_fusion_360_native` runs `box-run.sh` (native WM, no vdesk).
 
 After Autodesk sign-in, Fusion launches to the usual Welcome / Data Panel UI.
 
@@ -45,18 +58,36 @@ HKCU\Software\Wine\DllOverrides:
 (the non-prefixed variants match.) DXVK itself lives in the usual
 `system32` / `syswow64` slots (dropped there by winetricks during install).
 
-We also tune DXVK via `drive_c/dxvk.conf` to avoid the paths that
-historically crashed the embedded Qt WebEngine (Chromium) at init:
+We tune DXVK via `drive_c/dxvk.conf`, and — importantly — *scope* the
+settings per-executable. An earlier revision of this config applied everything
+globally, which reintroduced the "Data Panel goes black / dockable widget
+disappears" artefacts because DXVK's `deferSurfaceCreation` ended up applied
+to `Fusion360.exe` as well as `QtWebEngineProcess.exe`. The per-exe split
+gives each subprocess the knobs it actually needs:
 
 ```ini
-d3d11.maxFeatureLevel    = 11_1
-dxgi.maxFrameLatency     = 1
-dxgi.syncInterval        = 1
-dxgi.deferSurfaceCreation = True
+# Main CAD viewport — 11_1 cap, moderate latency, no forced vsync/defer.
+[Fusion360.exe]
+d3d11.maxFeatureLevel        = 11_1
+dxgi.maxFrameLatency         = 2
 d3d11.cachedDynamicResources = ""
+
+# Embedded Chromium (Open/Save, Data Panel, account popovers) — wants
+# deferred surface creation + low latency on Wine, otherwise dialogs
+# render blank until a mouse event forces a repaint.
+[QtWebEngineProcess.exe]
+dxgi.deferSurfaceCreation = True
+dxgi.maxFrameLatency      = 1
+dxgi.syncInterval         = 0
+d3d11.maxFeatureLevel     = 11_1
+
+[explorer.exe]
+d3d11.maxFeatureLevel = 11_0
 ```
 
-The launcher exports `DXVK_CONFIG_FILE` pointing at it.
+The launcher exports `DXVK_CONFIG_FILE` pointing at it, plus
+`DXVK_STATE_CACHE_PATH=drive_c/dxvk-cache` so shader compile is cached across
+runs.
 
 With this in place `GraphicsCardInfo.xml` reports the actual
 **NVIDIA GeForce RTX 5080** (rather than wined3d's fake GTX 470) and
@@ -139,9 +170,20 @@ forces Chromium to paint synchronously as part of layout instead:
 --disable-partial-raster
 ```
 
-If the dialog is still blank, escalate with
-`--disable-gpu-compositing --disable-gpu-rasterization` (full software
-path — slower but always paints).
+If the dialog is still blank, escalate with the full software path:
+
+```bash
+FUSION_CHROMIUM_SW=1 make start_fusion_360
+```
+
+which layers on `--disable-gpu --disable-gpu-compositing
+--disable-gpu-rasterization --use-gl=swiftshader --use-angle=swiftshader`
+(slower, but always paints).
+
+We also pin `QT_AUTO_SCREEN_SCALE_FACTOR=0` and `QT_ENABLE_HIGHDPI_SCALING=0`
+in both launchers. Without these, Qt would re-scale on top of the Wine DPI
+sync (§6) and clip a band of UI off the right/bottom of the virtual desktop —
+one of the lingering render issues attributed to "disappearing elements".
 
 ### 7b. Force `VirtualDeviceGLCore` in Fusion's option files on every launch
 
@@ -244,15 +286,59 @@ HKCU\Software\Wine\X11 Driver:
 - Overriding `bcp47langs` / `msvcp140` via `DllOverrides` — done by winetricks anyway, doesn't affect the Chromium crash.
 - `--disable-gpu --disable-software-rasterizer` together → Chromium CHECK failure because nothing is left to rasterize with. Never pass both.
 
+## Desktop-entry cleanup (the "two Fusion 360 icons in search" issue)
+
+Wine's post-install step drops a menu entry at
+
+```
+~/.local/share/applications/wine/Programs/Autodesk/Autodesk Fusion.desktop
+```
+
+that runs Fusion through the Windows Start-Menu `.lnk`:
+
+```
+wine "C:\…\Start Menu\Programs\Autodesk\Autodesk Fusion.lnk"
+```
+
+This bypasses every env var our launcher sets (no DXVK config scoping, no
+glvnd NVIDIA override, no virtual desktop, no DPI sync) — so that entry
+always starts a broken Fusion. Our own `Fusion360.desktop` (pointing at
+`box-run-vd.sh`) is what you want; the wine-generated one has to go.
+
+`make clean_desktop_duplicates` removes it and prunes the (now empty)
+`applications/wine/Programs/Autodesk/` subdirs, then refreshes
+`update-desktop-database`. Re-open the Activities Overview to see the
+change.
+
+We also repointed our `Fusion360.desktop` icon to `ECF6_Fusion360.0` (the
+proper orange **FUS** app icon the installer ships) instead of
+`application-fusion` (the white **FSCH** file-type icon) — the latter was
+the source of the "first Fusion-ish icon in search is white / looks like a
+document type" confusion.
+
 ## Files here
 
+- `Makefile` — entry point; see `make help`.
 - `fusion_installer.sh` — vendored copy of str0g's installer (as of 2025-11-28).
 - `run-install.sh` — wrapper that sets `DISPLAY`/`XAUTHORITY`/`WINEDEBUG` and logs to `install.log`/`install.last.log`.
-- `fusion-launch.log` — rolling log of our manual launches while debugging (safe to delete).
+- `fusion-launch.log` — rolling log of launches via `make start_fusion_360` (safe to delete).
 
-# Known Issues
+# Known issues / human reported
 
-There's still render issues in-app that aren't resolved with black background and disappearing UI elements, so the app is not (yet) in a usable state.
+- render issues persist: the component list tends to disappear and black backgrounds appear in a lot of places, some flickers etc., not really usable at this point
+
+# Known issues / generated
+
+- `err: D3D11DXGIKeyedMutex::AcquireSync: Not supported` still appears in
+  the log for a handful of shared textures. This is DXVK issue #160
+  (keyed-mutex shared surfaces aren't implemented, still true in DXVK 2.7.1)
+  and is believed to account for occasional flicker on a minor subset of
+  secondary viewport panes. No known workaround short of patching DXVK.
+- `err: readMonitorEdidFromKey: Failed to get EDID reg key size` — benign:
+  DXVK can't read a monitor EDID blob out of Wine's virtual registry and
+  falls back to blank colorimetry. Doesn't affect the viewport on SDR.
+- `err: module:import_dll Library Qt6Pdf.dll … not found` — Fusion's PDF
+  preview plugin can't load; Fusion itself doesn't need it.
 
 # Agent Model
 
